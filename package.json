@@ -11,7 +11,7 @@
         "@tailwindcss/typography": "^0.5.0",
         "alpinejs": "^3.0.6",
         "autoprefixer": "^10.4.7",
-        "axios": "^1.1.2",
+        "axios": "^1.2.2",
         "bootstrap": "^5.2.3",
         "laravel-vite-plugin": "^0.7.2",
         "lodash": "^4.17.19",
@@ -21,6 +21,15 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "bootstrap": "^5.2.3"
+        "@vitejs/plugin-vue": "^4.0.0",
+        "bootstrap": "^5.2.3",
+        "caman": "^4.1.2",
+        "jspdf": "^2.5.1",
+        "jspdf-autotable": "^3.5.28",
+        "legofy": "^0.1.13",
+        "legra": "^0.3.0",
+        "opencv.js": "^1.2.1",
+        "vue": "^3.2.36",
+        "vue-loader": "^17.0.1"
     }
 }

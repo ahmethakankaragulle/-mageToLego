@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/start', function () {
+    return view('image-editor');
+});
+
+Route::get('/contact', 'ContactController@show');
+Route::post('/contact', 'ContactController@mailContactForm');
 
 Route::middleware([
     'auth:sanctum',
