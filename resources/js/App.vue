@@ -1,12 +1,15 @@
 <template>
       <ImageEditorComponent/>
+      <RouterView></RouterView>
   </template>
   <script>
 import ImageEditorComponent from './ImageEditorComponent.vue';
+import { RouterView } from 'vue-router';
   export default {
     name: 'App',
     components: {
-    ImageEditorComponent
+    ImageEditorComponent,
+    RouterView
     },
     data: () => ({
     }),

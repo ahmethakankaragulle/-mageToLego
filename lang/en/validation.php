@@ -98,9 +98,9 @@ return [
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'array' => 'The :attribute must have at least :min items.',
-        'file' => 'The :attribute must be at least :min kilobytes.',
-        'numeric' => 'The :attribute must be at least :min.',
-        'string' => 'The :attribute must be at least :min characters.',
+        'file' => ':attribute en az :min kilobytes olmalıdır.',
+        'numeric' => ':attribute en az :min olmalıdır.',
+        'string' => ':attribute en az :min karakterden oluşmalıdır.',
     ],
     'min_digits' => 'The :attribute must have at least :min digits.',
     'multiple_of' => 'The :attribute must be a multiple of :value.',
@@ -136,7 +136,7 @@ return [
         'numeric' => 'The :attribute must be :size.',
         'string' => 'The :attribute must be :size characters.',
     ],
-    'starts_with' => 'The :attribute must start with one of the following: :values.',
+    'starts_with' => ':attribute :values ile başlamalıdır.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
     'unique' => 'The :attribute has already been taken.',
@@ -174,6 +174,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+
+        'full-name' => 'Adınız',
+        'state-address-region' => 'Adresiniz',
+        'telephone' => 'Telefon numaranız',
+
+    ],
 
 ];
