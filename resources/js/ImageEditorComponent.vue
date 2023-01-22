@@ -59,8 +59,8 @@
                     <div style="width:50%;height: 50%;padding-top:50px;display:flex;align-items:center;justify-content:center;">
                             <canvas id="canvas" ref="canvas" style="height:400px;box-shadow:10px 10px 10px 10px gray;" class="border" @click="pick($event)"></canvas>
                     </div>
-                    <div style="width:30%; height: 50%; display: flex; flex-direction: column; margin-top: 2rem;">
-                        <label for="customRange2" class="form-label" style="color:#0d6efd; font-size: 20px; font-weight: 600; text-align: start; padding-left: 10%;">Boyut</label>
+                    <div class="image-range">
+                        <label for="customRange2" class="form-label" style="color:#0d6efd; font-size: 20px; font-weight: 600; text-align: start;">Boyut</label>
                         <input type="range" defaultValue="6" class="form-range" min="1" max="7" id="customRange2" @change="canvasimage">
                     </div>
                 </div>
@@ -96,11 +96,11 @@
                             <li>Kolay yapım aşamaları tarifi</li>
                             <li>Siparişten sonraki 3 gün içinde teslim</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-primary" @click="changetab(5)">Sepete Ekle</button>
+                            <button type="button" class="btn btn-lg btn-block btn-primary" @click="postData">Sepete Ekle</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
 
             <div class="tab-pane fade" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab" style="width:100%;color: black;">
                 <div>
@@ -120,19 +120,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="product in products" :key="product.id">
-                        <td>{{ product[0] }}</td>
-                        <td>{{ product[1] }}</td>
-                        <td>#{{ product[2] }}</td>
-                        <td>{{ product[3] }}</td>
+                        <tr v-for="b in basket" :key="b.id">
+                        <td>{{ b[0] }}</td>
+                        <td>{{ b[1] }}</td>
+                        <td>#{{ b[2] }}</td>
+                        <td>{{ b[3] }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="tab-pane fade" id="pills-addcart" role="tabpanel" aria-labelledby="pills-addcart-tab" style="width:100%;color: black;">
-                <div class="alert alert-success" role="alert">
-                    Ürün başarıyla sepetinize eklenmiştir!
+                <div v-if="login" class="alert alert-success" role="alert">
+                    {{ sepetmesajı }}
+                </div>
+                <div v-else class="alert alert-danger" role="alert">
+                    {{ sepetmesajı }}
                 </div>
             </div>
 
@@ -149,8 +152,11 @@
                 previewImage:null,
                 range: 6,
                 temp: null,
-                products:[],
+                product: "",
+                basket:[],
                 pricing: 0,
+                sepetmesajı: "Ürün başarıyla sepetinize eklenmiştir!",
+                login:false,
                 brickColor:[{"id":"1","rgb":[244,244,244],"hex":"f4f4f4"},{"id":"2","rgb":[208,206,201],"hex":"d0cec9"},{"id":"3","rgb":[178,180,178],"hex":"b2b4b2"},{"id":"4","rgb":[140,138,136],"hex":"8c8a88"},{"id":"5","rgb":[100,100,100],"hex":"646464"},{"id":"6","rgb":[22,22,22],"hex":"161616"},{"id":"7","rgb":[0,187,220],"hex":"00bbdc"},{"id":"8","rgb":[175,205,215],"hex":"afcdd7"},{"id":"9","rgb":[139,190,232],"hex":"8bbee8"},{"id":"11","rgb":[62,135,203],"hex":"3e87cb"},{"id":"12","rgb":[0,94,184],"hex":"005eb8"},{"id":"13","rgb":[51,63,72],"hex":"333f48"},{"id":"14","rgb":[0,53,80],"hex":"003550"},{"id":"16","rgb":[221,121,117],"hex":"dd7975"},{"id":"18","rgb":[218,41,28],"hex":"da291c"},{"id":"19","rgb":[177,162,202],"hex":"b1a2ca"},{"id":"20","rgb":[142,127,174],"hex":"8e7fae"},{"id":"21","rgb":[236,208,181],"hex":"ecd0b5"},{"id":"22","rgb":[240,196,160],"hex":"f0c4a0"},{"id":"23","rgb":[250,170,141],"hex":"faaa8d"},{"id":"24","rgb":[248,173,109],"hex":"f8ad6d"},{"id":"25","rgb":[229,158,109],"hex":"e59e6d"},{"id":"27","rgb":[181,129,80],"hex":"b58150"},{"id":"28","rgb":[255,105,0],"hex":"ff6900"},{"id":"29","rgb":[166,85,35],"hex":"a65523"},{"id":"30","rgb":[107,53,41],"hex":"6b3529"},{"id":"31","rgb":[105,63,35],"hex":"693f23"},{"id":"32","rgb":[78,53,36],"hex":"4e3524"},{"id":"32","rgb":[120,78,144],"hex":"784e90"},{"id":"34","rgb":[248,229,154],"hex":"f8e59a"},{"id":"35","rgb":[213,200,151],"hex":"d5c897"},{"id":"36","rgb":[239,182,97],"hex":"efb661"},{"id":"37","rgb":[255,209,0],"hex":"ffd100"},{"id":"38","rgb":[255,163,0],"hex":"ffa300"},{"id":"39","rgb":[229,155,220],"hex":"e59bdc"},{"id":"40","rgb":[177,78,181],"hex":"b14eb5"},{"id":"41","rgb":[174,164,111],"hex":"aea46f"},{"id":"42","rgb":[174,184,98],"hex":"aeb862"},{"id":"43","rgb":[181,189,0],"hex":"b5bd00"},{"id":"44","rgb":[239,215,229],"hex":"efd7e5"},{"id":"45","rgb":[94,126,41],"hex":"5e7e29"},{"id":"46","rgb":[231,147,183],"hex":"e793b7"},{"id":"47","rgb":[207,87,138],"hex":"cf578a"},{"id":"48","rgb":[51,85,37],"hex":"335525"},{"id":"49","rgb":[45,200,77],"hex":"2dc84d"},{"id":"50","rgb":[0,154,6],"hex":"009a06"},
                 ]
             }
@@ -170,7 +176,7 @@
                 let bg = new Image();
                 bg.src = this.previewImage;
                 let val = document.getElementById('customRange2')
-                this.products = [];
+                this.basket = [];
                 this.colorReduction(10-parseInt(val.value));
                 document.getElementById('pills-edit-tab').click();
             },
@@ -206,7 +212,7 @@
                             const pixelIndexPosition = (x + y * iw) * 4;
                             //console.log(data[pixelIndexPosition],data[pixelIndexPosition+1],data[pixelIndexPosition+2]);
                             let minIndex = this.getColorWithPalette(data[pixelIndexPosition],data[pixelIndexPosition+1],data[pixelIndexPosition+2]);
-                            this.addProduct(minIndex);
+                            this.addBasket(minIndex);
                             sayı += 1;
                             ctx.fillStyle = `rgba(
                             ${this.brickColor[minIndex].rgb[0]},
@@ -219,6 +225,8 @@
                     }
                     this.calculatePricing();
                 }
+
+                this.product = ctx.canvas.toDataURL()
             },
             pick(event) {
                 const bounding = document.getElementById('canvas').getBoundingClientRect();
@@ -307,12 +315,12 @@
                     
 
             },
-            addProduct(index){
+            addBasket(index){
                 var product = []
                 var newproduct = true;
-                for(var i = 0; i<this.products.length; i++){
-                    if(this.brickColor[index].id == this.products[i][0]){
-                        this.products[i][3] += 1;
+                for(var i = 0; i<this.basket.length; i++){
+                    if(this.brickColor[index].id == this.basket[i][0]){
+                        this.basket[i][3] += 1;
                         newproduct = false;
                         break;
                     }
@@ -322,15 +330,46 @@
                     product[1] = this.brickColor[index].id;
                     product[2] = this.brickColor[index].hex;
                     product[3] = 1;
-                    this.products.push(product);
+                    this.basket.push(product);
                 }   
             },
             calculatePricing(){
                 var totalPiece = 0;
-                for(let i = 0 ; i<this.products.length; i++){
-                    totalPiece += this.products[i][3];
+                for(let i = 0 ; i<this.basket.length; i++){
+                    totalPiece += this.basket[i][3];
                 }
-                this.pricing = totalPiece*0.2; 
+                this.pricing = Number((totalPiece*0.2).toFixed(2)); 
+            },
+            postData(){
+                console.log(this.product.length);
+                    axios.post('product/push', {
+                    imagedata: this.product
+                }).then((response) => {
+                    console.log(response);
+                    axios.post('basket/push', {
+                    product_id: response.data.pop().id,
+                    data: this.basket
+                    }).then((response) => {
+                        this.login=true
+                        document.getElementById('pills-addcart-tab').click();
+                    }).catch((error) => { 
+                        if (error) {
+                            this.login=false
+                            this.sepetmesajı = 'Sepete eklemek için giriş yapmalısını !'
+                            document.getElementById('pills-addcart-tab').click();
+                        }  
+                    })            
+                }).catch((error) => { 
+                    if (error) {
+                        
+                        this.login=false
+                        this.sepetmesajı = 'Bu ürün sepete eklenemiyor !'
+                        document.getElementById('pills-addcart-tab').click();
+                    }  
+                })      
+
+
+               
             }
         }
     }
@@ -392,29 +431,29 @@
     align-items: center;
 }
 input[type=file]::file-selector-button {
-  margin-right: 20px;
-  border: none;
-  background: #084cdf;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  transition: background .2s ease-in-out;
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
 }
 
 input[type=file]::file-selector-button:hover {
-  background: #0d45a5;
+    background: #0d45a5;
 }
 
 .image-upload button{
     margin-right: 20px;
-  border: none;
-  border-radius: 10px;
-  background: #084cdf;
-  padding: 10px 20px;
-  color: #fff;
-  cursor: pointer;
-  transition: background .2s ease-in-out;
+    border: none;
+    border-radius: 10px;
+    background: #084cdf;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
 }
 
 .image-upload button:hover{
@@ -539,5 +578,16 @@ label {
     font-size: 15px;
     font-weight: 600;
     color: #084cdf;
+}
+
+.image-range{
+    width:30%; 
+    height: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 2rem;
+    padding: 25px 25px;
+    border: solid #084cdf 0.2px;
+    box-shadow:10px 10px 10px 5px gray;
 }
 </style>
