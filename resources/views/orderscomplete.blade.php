@@ -404,7 +404,7 @@
     <div class="content" style="padding:5% 0px;">
         <div>
             <div>
-                <img src="storage/images/heart.png" alt="heart">
+                <img src="/storage/images/heart.png" alt="heart">
             </div>
             <div>
                 <h1 class="display-3 text-dark mt-4">Siparişiniz Alındı, Teşekkürler :)</h1>

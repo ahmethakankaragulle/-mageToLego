@@ -2,24 +2,31 @@
     
     <div class="content">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            
             <li class="nav-items" role="presentation">
                 <button class="nav-link active" id="pills-upload-tab" data-bs-toggle="pill" data-bs-target="#pills-upload" type="button" role="tab" aria-controls="pills-upload" aria-selected="true">Fotoğraf Yükle</button>
             </li>
+
             <li class="nav-items" role="presentation">
                 <button class="nav-link" id="pills-edit-tab" data-bs-toggle="pill" data-bs-target="#pills-edit" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Düzenle</button>
             </li>
+
             <li class="nav-items" role="presentation">
                 <button class="nav-link" id="pills-pricing-tab" data-bs-toggle="pill" data-bs-target="#pills-pricing" type="button" role="tab" aria-controls="pills-pricing" aria-selected="false">Sipariş Ver</button>
             </li>
+
             <li class="nav-items" role="presentation">
                 <button class="nav-link" id="pills-list-tab" data-bs-toggle="pill" data-bs-target="#pills-list" type="button" role="tab" aria-controls="pills-list" aria-selected="false">Listeyi Getir</button>
             </li>
+
             <li class="nav-items" role="presentation">
                 <button class="nav-link" id="pills-addcart-tab" data-bs-toggle="pill" data-bs-target="#pills-addcart" type="button" role="tab" aria-controls="pills-addcart" aria-selected="false">Sepete Ekle</button>
             </li>
+
         </ul>
 
         <div class="tab-content" id="pills-tabContent">
+
             <div class="tab-pane fade show active" id="pills-upload" role="tabpanel" aria-labelledby="pills-upload-tab">
                 <div class="image-upload">
                     <p v-if="this.previewImage == null" class="display-6 text-dark" style="margin-bottom:4rem;">Translego için bir resim seçin</p>
@@ -48,6 +55,7 @@
                     </label>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="pills-edit" role="tabpanel" aria-labelledby="pills-edit-tab" style="width: 100%;">
                 <div>
                     <span style="display: flex; position:absolute; right:5rem; top:7rem; justify-content: end;">
@@ -65,6 +73,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="tab-pane fade" id="pills-pricing" role="tabpanel" aria-labelledby="pills-pricing-tab" style="width:100%;color: black;">
                 <div>
                     <span style="display: flex; position:absolute; right:5rem; top:7rem; justify-content: end;">
@@ -141,11 +150,10 @@
 
         </div>
         
-        
-        
     </div>
- </template>
- <script>
+
+</template>
+<script>
     export default {
         data(){
             return{
@@ -172,6 +180,7 @@
                 };
 
             },
+            
             canvasimage(){
                 let bg = new Image();
                 bg.src = this.previewImage;
@@ -180,6 +189,7 @@
                 this.colorReduction(10-parseInt(val.value));
                 document.getElementById('pills-edit-tab').click();
             },
+
             colorReduction(pixelationFactor){
                 const canvas = this.$refs.canvas;
                 const ctx = canvas.getContext('2d');
@@ -228,6 +238,7 @@
 
                 this.product = ctx.canvas.toDataURL()
             },
+
             pick(event) {
                 const bounding = document.getElementById('canvas').getBoundingClientRect();
                 let ctx = document.getElementById('canvas').getContext("2d"); 
@@ -254,6 +265,7 @@
                 const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
                 console.log(rgba);
             },
+
             RGBAToHexA(r,g,b) {
                     
                 r = r.toString(16);
@@ -269,6 +281,7 @@
                 return r + g + b;
 
             },
+
             getColorWithPalette(r,g,b){
                 var rgb = this.RGBAToHexA(r,g,b)
                 var min = Math.abs(parseInt(this.brickColor[0].hex,16) - parseInt(rgb,16));
@@ -283,6 +296,7 @@
                 return minIndex;
                 
             },
+
             getHexCode(){
                 for(let i=0; i<this.BrickColor.length; i++){
                     let hex = this.RGBAToHexA(this.BrickColor[i].rgb[0],this.BrickColor[i].rgb[1],this.BrickColor[i].rgb[2])
@@ -290,6 +304,7 @@
                 }
                 this.exportToJsonFile(this.BrickColor);
             },
+
             exportToJsonFile(jsonData) {
                 let dataStr = JSON.stringify(jsonData);
                 let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -301,6 +316,7 @@
                 linkElement.setAttribute('download', exportFileDefaultName);
                 linkElement.click();
             },
+
             changetab(index){
                 if(index == 1)
                     document.getElementById('pills-upload-tab').click();
@@ -315,6 +331,7 @@
                     
 
             },
+
             addBasket(index){
                 var product = []
                 var newproduct = true;
@@ -333,6 +350,7 @@
                     this.basket.push(product);
                 }   
             },
+
             calculatePricing(){
                 var totalPiece = 0;
                 for(let i = 0 ; i<this.basket.length; i++){
@@ -340,6 +358,7 @@
                 }
                 this.pricing = Number((totalPiece*0.2).toFixed(2)); 
             },
+
             postData(){
                 console.log(this.product.length);
                     axios.post('product/push', {
@@ -355,7 +374,7 @@
                     }).catch((error) => { 
                         if (error) {
                             this.login=false
-                            this.sepetmesajı = 'Sepete eklemek için giriş yapmalısını !'
+                            this.sepetmesajı = 'Sepete ürün eklemek için giriş yapmalısını !'
                             document.getElementById('pills-addcart-tab').click();
                         }  
                     })            
@@ -363,7 +382,10 @@
                     if (error) {
                         
                         this.login=false
-                        this.sepetmesajı = 'Bu ürün sepete eklenemiyor !'
+                        if(error.response.status == '401')
+                            this.sepetmesajı = 'Sepete ürün eklemek için giriş yapmalısını !'
+                        else
+                            this.sepetmesajı = 'Maalesef bu ürün sepete eklenemiyor !'
                         document.getElementById('pills-addcart-tab').click();
                     }  
                 })      

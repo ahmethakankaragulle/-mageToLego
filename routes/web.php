@@ -32,6 +32,22 @@ Route::get('/editor', function () {
 });
 
 
+Route::get('user/orders', function () {
+
+    $orders = auth()->user()->orders()->get();
+    $query = OrderItem::query();
+    foreach ($orders as $order) {
+        $query->where('order_id', $order->id);
+    }
+    $order_items = $query;
+
+    return view('userorders')->with([
+        $orders,
+        $order_items
+    ]);
+});
+
+
 Route::get('/sepet', function () {
     return view('cart')->with([
         'baskets' => auth()->user()->baskets()->whereStatus(0)->get(),
@@ -96,6 +112,7 @@ Route::post('/sepet/onayla', function (Request $request) {
     ]);
 
     $order = new Order();
+    $product = auth()->user()->products()->whereStatus(0)->get()->first();
 
     $basket = auth()->user()->baskets()->whereStatus(0)->get();
     $order->price = $basket->sum('price');
@@ -106,15 +123,17 @@ Route::post('/sepet/onayla', function (Request $request) {
     $order->status = 1;
     $order->save();
 
-    $basket->each(function ($basket) use ($order) {
+    $basket->each(function ($basket) use ($order, $product) {
         $orderItems = new OrderItem();
         $orderItems->order_id = $order->id;
+        $orderItems->product_id = $product->id;
         $orderItems->data = $basket->data;
         $orderItems->save();
     });
 
 
     $basket->each(fn ($basket) => $basket->update(['status' => 1]));
+    $product->each(fn ($product) => $product->update(['status' => 1]));
 
     return view('orderscomplete');
 })->name('sepet.onay');

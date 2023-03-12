@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title name="header">Adres Bilgileri</title>
+    <title name="header">Sepet</title>
 
     <!-- Fonts -->
 
@@ -389,17 +389,7 @@
         body {
             font-family: 'Nunito', sans-serif;
             padding-top: 4.5rem;
-        }
 
-        .content {
-            color: black;
-        }
-
-        label {
-            color: black;
-            text-align: left;
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
         }
     </style>
 
@@ -411,70 +401,9 @@
 
     @include('layouts.header')
 
-    <div class="content" style="padding:30px 0px;">
-        <div class="container" style="align-items: flex-end;">
-
-            <h1 class="display-4 text-dark" style="text-align: left; margin:3rem 1rem;">Adres Bilgileri</h1>
-            <div>
-                <div class="container" style="text-align: left; color:red;">
-                    @if($errors->any())
-                    <div class="row">
-                        <div class="col">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>
-                                    {{ $error }}
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    @endif
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <form class="form-horizontal" role="form" method="post" action="{{ route('sepet.onay') }}">
-                                @csrf
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <label for="inputFullName" class="col-sm-2 control-label">Adınız ve Soyadınız</label>
-                                        <input type="text" class="form-control" id="inputFullName" name="full-name" placeholder="Adınız ve soyadınız">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-
-                                        <label for="inputTelephone" class="col-sm-2 control-label">Telefon Numarası</label>
-                                        <input type="text" class="form-control" id="inputTelephone" name="telephone" placeholder="Telefon Numaranız">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputFullAddress" class="col-sm-2 control-label">Tam Adres</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputFullAddress" name="state-adress-region" placeholder="Tam adres">
-                                    </div>
-                                </div>
-                                <div style="width: 82%; text-align:right; margin-top:4rem;">
-                                    <button class="btn btn-lg btn-primary"> <span>ONAYLA</span> </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div style="position: absolute; right:5%; bottom:40%">
-                        <img src="/storage/images/address-map.png" alt="location">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
+    <div class="content" style="padding:5% 0px;">
 
     </div>
-    </div>
-
 </body>
 
 </html>

@@ -627,7 +627,7 @@
             </div>
             <div class="col-sm-6">
 
-                <img src="storage/images/LEGO.png" height="90%" alt="">
+                <img src="/storage/images/LEGO.png" height="90%" alt="">
 
             </div>
         </div>
@@ -649,10 +649,10 @@
             <div class="col-sm-6" style="padding-left:100px;align-items:center; margin:auto; width:50%">
                 <div class="img-comp-container">
                     <div class="img-comp-img">
-                        <img src="storage/images/legoimage.png" width="500" height="400">
+                        <img src="/storage/images/legoimage.png" width="500" height="400">
                     </div>
                     <div class="img-comp-img img-comp-overlay">
-                        <img src="storage/images/notlego2.jpeg" width="500" height="400">
+                        <img src="/storage/images/notlego2.jpeg" width="500" height="400">
                     </div>
                 </div>
             </div>

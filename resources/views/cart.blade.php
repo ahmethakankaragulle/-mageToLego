@@ -448,7 +448,7 @@
                 <div class="accordion">
                     <div style="width:15%">
                         <?php
-                        $imagesource = "storage/products/deneme.png";
+                        $imagesource = "/storage/products/deneme.png";
                         $productid = $basket->product_id;
                         foreach ($products as $product) {
                             if ($product->id == $basket->product_id) {
@@ -526,7 +526,7 @@
                     Sepetinizde ürün yok !
                 </div>
                 <div style="position: absolute; right:38%; bottom:5%;">
-                    <img src="storage/images/empty-cart.png" alt="">
+                    <img src="/storage/images/empty-cart.png" alt="">
                 </div>
                 @else
                 <div style="width:60%; text-align:right; margin-top:2rem; margin-bottom:10rem;">
@@ -537,7 +537,7 @@
                     <a href="/adres" class="btn btn-lg btn-primary"> <span>DEVAM</span> </a>
 
                     <div style="z-index:-1; position:absolute; top:25%; right:5%;">
-                        <img src="storage/images/full-cart.png" alt="" width="200px">
+                        <img src="/storage/images/full-cart.png" alt="" width="200px">
                     </div>
                     @endif
                 </div>

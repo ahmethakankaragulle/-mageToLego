@@ -9,7 +9,7 @@
         border: none;
         border-radius: 50%;
         cursor: pointer;
-        content: url("storage/icons/user-2-svgrepo-com.svg");
+        content: url("/storage/icons/user-2-svgrepo-com.svg");
     }
 
     /* Dropdown button on hover & focus */
@@ -70,7 +70,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
     <div class="container-fluid">
-        <img src="storage/icons/logo.png" alt="logo" style="padding:5px 10px;">
+        <img src="/storage/icons/logo.png" alt="logo" style="padding:5px 10px;">
         <a class="navbar-brand" href="{{ url('/') }}" style="font-weight:800; font-size:25px;"> <span style="color:#C70039;">Trans</span><span style="color:#185ADB;">Lego</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -89,7 +89,7 @@
             </ul>
         </div>
         <div class="dropdown">
-            <button onclick="dropdown()" class="dropbtn"><img class="dropimg" src="storage/icons/user-2-svgrepo-com.svg" width="30" alt=""></button>
+            <button onclick="dropdown()" class="dropbtn"><img class="dropimg" src="/storage/icons/user-2-svgrepo-com.svg" width="30" alt=""></button>
 
             @if (Route::has('login'))
             <div id="myDropdown" class="dropdown-content">

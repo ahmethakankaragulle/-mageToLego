@@ -14,4 +14,10 @@ class OrderItem extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'data'
+    ];
 }
